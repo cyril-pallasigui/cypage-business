@@ -1,0 +1,22 @@
+{
+	"browserSyncOptions": {
+		"proxy": "http://cypage-business.local/",
+		"notify": false,
+		"ghostMode": false,
+		"host": "192.168.1.206"
+	},
+	"browserSyncWatchFiles": ["./css/*.min.css", "./js/*.min.js", "./**/*.php"],
+	"paths": {
+		"js": "./js",
+		"css": "./css",
+		"img": "./img",
+		"imgsrc": "./src/img",
+		"sass": "./sass",
+		"node": "./node_modules/",
+		"bower": "./bower_components/",
+		"dev": "./src",
+		"dist": "./dist",
+		"distprod": "./dist-product",
+		"vendor": ""
+	}
+}

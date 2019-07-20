@@ -1,0 +1,309 @@
+/**
+ * This is an empty scss file for your custom styles - Please add your super duper awesome mega design styles here
+ */
+
+ /**
+ * Extend Bootstrap classes
+ */
+
+/* Recreate the old Bootstrap icon bars */
+.navbar {
+	.icon-bar {
+		display: block;
+		width: 22px;
+		height: 2px;
+		border-radius: 1px;
+		margin: 5px 0;
+		transition: all 0.2s;
+	}
+}
+
+/* Dark links against a light background */
+.navbar.navbar-light {
+	.icon-bar {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+}
+
+/* White links against a dark background */
+.navbar.navbar-dark {
+	.icon-bar {
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+}
+
+/* Set the navbar-toggler to its default state (before animating into an "X" icon) */
+.navbar-toggler.collapsed {
+	.top-bar {
+		transform: translateY(0) rotate(0);
+	}
+	.middle-bar {
+		opacity: 1;
+	}
+	.bottom-bar {
+		transform: translateY(0) rotate(0);
+	}
+}
+
+/* Animate the navbar-toggler into an "X" icon */
+.navbar-toggler {
+	.top-bar {
+		transform: translateY(7px) rotate(45deg);
+	}
+	.middle-bar {
+		opacity: 0;
+	}
+	.bottom-bar {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+}
+
+/* Remove underline from specific links */
+a.navbar-brand, a.nav-link, a.btn {
+	text-decoration: none;
+}
+.navbar-brand a {
+	text-decoration: none;
+}
+
+/* Normalize blockquote font size */
+.blockquote-normalized {
+	font-size: 1rem; /* changed from 1.25 rem to 1rem */
+
+	.blockquote-footer {
+		font-size: 100%; /* changed from 80% to 100% */
+	}
+}
+
+/* Remove bottom margin of headings when they are within a .card-header */
+.card-header {
+	.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+		margin-bottom: 0;
+	}
+}
+
+/**
+ * Custom utility classes
+ */
+
+.opacity-95 {
+	opacity: 0.95 !important;
+}
+
+/* Remove the outline of an element */
+.outline-none {
+	outline: none !important;
+}
+
+/* Set an element's min-height to 500px */
+.min-h-500px {
+	min-height: 500px !important;
+}
+
+/*
+ * Create a background image element
+ * Place the background image element inside the containing element and the containing element should have a non-static position
+ */
+.background-image {
+	z-index: -2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-attachment: scroll;
+}
+
+/*
+ * Create a background overlay element
+ * Place the background overlay element inside the containing element and the containing element should have a non-static position
+ */
+.background-overlay {
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: $gray-900;
+	opacity: 0.4;
+}
+
+/* Set an element's width to 50% on medium devices and up */
+@include media-breakpoint-up(md) {
+	.w-md-50 {
+		width: 50% !important;
+	}
+}
+
+/* Set an element's width to 75% on medium devices and up */
+@include media-breakpoint-up(md) {
+	.w-md-75 {
+		width: 75% !important;
+	}
+}
+
+/* Set an element's width to 50% on large devices and up */
+@include media-breakpoint-up(lg) {
+	.w-lg-50 {
+		width: 50% !important;
+	}
+}
+
+/* Set an element's width to 75% on large devices and up */
+@include media-breakpoint-up(lg) {
+	.w-lg-75 {
+		width: 75% !important;
+	}
+}
+
+/* Set an element's width to 50% on extra large devices and up */
+@include media-breakpoint-up(xl) {
+	.w-xl-50 {
+		width: 50% !important;
+	}
+}
+
+/* Set an element's width to 75% on extra large devices and up */
+@include media-breakpoint-up(xl) {
+	.w-xl-75 {
+		width: 75% !important;
+	}
+}
+
+/* Display headings */
+.display-5 {
+  font-size: 2.5rem;
+}
+.display-6 {
+  font-size: 2rem;
+}
+
+/* Apply zebra stripes on a container element */
+.zebra-striped > *:nth-child(even) {
+	background-color: $light;
+}
+
+/* Set an offset for the target of an anchor element to account for fixed top navbar and gutters */
+a.target-offset {
+	display: block;
+	position: relative;
+	top: -50px - $grid-gutter-width; /* navbar height and wrapper top padding */
+	visibility: hidden;
+}
+
+/* Allow newline characters to break a line */
+.text-prewrap {
+	white-space: pre-wrap !important;
+}
+
+/* Set an element's height to 300px */
+.h-300px {
+	height: 300px !important;
+}
+
+/* Wrap an element's content with left and right double quotes */
+.wrap-quotes:before {
+	content: '\201c';
+}
+.wrap-quotes:after {
+	content: '\201d';
+}
+
+/* Add a zoom in animation on hover to larger items */
+.zoom-in-lg {
+	transition: transform .2s ease-in-out;
+}
+.zoom-in-lg:hover {
+	transform: scale(1.05);
+}
+
+/* Add a zoom in animation on hover to smaller items */
+.zoom-in-sm {
+	transition: transform .1s ease-in-out;
+}
+.zoom-in-sm:hover {
+	transform: scale(1.1);
+}
+
+/* Create an expandable text block with "Show more/less" link */
+.expandable-text-block {
+	.more-text, .more-ellipses {
+		&:after {
+			content: ' ';
+		}
+	}
+}
+.expandable-text-block.collapsed {
+	.more-text, .less-link {
+		display: none;
+	}
+	.more-ellipses, .more-link {
+		display: inline;
+	}
+}
+.expandable-text-block:not(.collapsed) {
+	.more-ellipses, .more-link {
+		display: none;
+	}
+	.more-text, .less-link {
+		display: inline;
+	}
+}
+
+.pl-6 {
+    padding-left: 3.75rem !important;
+}
+
+/* Set an element's background color to gray */
+.bg-gray-200 {
+	background-color: $gray-200 !important;
+}
+
+/* Append an asterisk to required fields */
+.required:after {
+	content: ' *';
+	color: red;
+}
+
+/**
+ * Custom specific styles
+ */
+
+/* Use the $primary color for Font Awesome icons */
+i:not(.fa-inverse) {
+	color: $primary;
+}
+
+/* If the Font Awesome icon is inside a button, inherit the color from the button */
+.btn i:not(.fa-inverse) {
+	color: inherit;
+}
+
+/* Use the $facebook color for Font Awesome icons */
+i.color-facebook:not(.fa-inverse) {
+	color: $facebook;
+}
+
+/* Use the $twitter color for Font Awesome icons */
+i.color-twitter:not(.fa-inverse) {
+	color: $twitter;
+}
+
+/* Use the $youtube color for Font Awesome icons */
+i.color-youtube:not(.fa-inverse) {
+	color: $youtube;
+}
+
+/* Use the $instagrammagenta color for Font Awesome icons */
+i.color-instagrammagenta:not(.fa-inverse) {
+	color: $instagrammagenta;
+}
+
+/* Use the $linkedin color for Font Awesome icons */
+i.color-linkedin:not(.fa-inverse) {
+	color: $linkedin;
+}

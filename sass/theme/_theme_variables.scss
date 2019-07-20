@@ -1,0 +1,29 @@
+/**
+ * Use this file to overwrite the basic Bootstrap variables and add your own variables
+ * To overwrite a Bootstrap variable you don´t have to touch the Bootstrap folder.
+ * Just copy a variable from src/sass/bootstrap4/_variables.scss, paste it here and edit the value.
+ */
+
+$primary: #52658f;
+$secondary: #f7f5e6;
+$font-family-open-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-base: $font-family-open-sans;
+$line-height-base: 1.6;
+$font-size-base: 1rem !default;
+$h1-font-size: $font-size-base * 1.9375;
+$h2-font-size: $font-size-base * 1.625;
+$h3-font-size: $font-size-base * 1.375;
+$h4-font-size: $font-size-base * 1.1875;
+$h5-font-size: $font-size-base * 1.0625;
+$h6-font-size: $font-size-base;
+$link-decoration: underline;
+$link-hover-decoration: none;
+$carousel-indicator-height: 4px;
+$gray-500: #adb5bd !default;
+$carousel-indicator-active-bg: $gray-500;
+$modal-dialog-margin: 1rem;
+$facebook: #1877f2;
+$twitter: #1da1f2;
+$youtube: #ff0000;
+$instagrammagenta: #c32aa3;
+$linkedin: #007bb5;
