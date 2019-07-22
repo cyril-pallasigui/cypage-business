@@ -100,6 +100,59 @@ if (filter_var($_POST['submitted'], FILTER_SANITIZE_STRING) === '1') { // checks
 }
 
 /**
+ * Breadcrumbs for Pages
+ */
+function cp_breadcrumbs_page() {
+	global $post;
+	$home_url = get_bloginfo('url'); ?>
+
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			<!-- Create the breadcrumb for the homepage -->
+			<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url ?>">
+					<i class="fas fa-home mr-1"></i><span itemprop="name">Home</span>
+				</a>
+				<meta itemprop="position" content="1" />
+			</li>
+
+			<?php
+			// Store the parent pages' IDs in an array (if any)
+			$parent_id = $post->post_parent;
+			$parents = array();
+			while ($parent_id) {
+				$parents[] = $parent_id;
+				$parent_page = get_post($parent_id);
+				$parent_id = $parent_page->post_parent;
+			}
+
+			$position = 2;
+
+			// Create the breadcrumbs for the parent pages
+			if ($parents) {
+				$parents = array_reverse($parents);
+				foreach ($parents as $parent) { ?>
+					<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo get_permalink($parent); ?>">
+							<span itemprop="name"><?php echo get_the_title($parent); ?></span>
+						</a>
+						<meta itemprop="position" content="<?php echo $position++; ?>" />
+					</li>
+				<?php }
+			} ?>
+
+			<!-- Create the breadcrumb for the current page -->
+			<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<span itemprop="name"><?php the_title(); ?></span>
+				<meta itemprop="position" content="<?php echo $position; ?>" />
+			</li>
+
+		</ol>
+	</nav>
+<?php }
+
+/**
  * Customize site info content
  */
 add_filter( 'understrap_site_info_content', 'cp_site_info' );
