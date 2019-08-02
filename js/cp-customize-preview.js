@@ -82,4 +82,10 @@
 			$( '#email-text' ).text( to );
 		} );
 	} );
+
+	wp.customize( 'social_heading', function( value ) {
+		value.bind( function( to ) {
+			$( '#social-heading' ).text( to );
+		} );
+	} );
 } )( jQuery );

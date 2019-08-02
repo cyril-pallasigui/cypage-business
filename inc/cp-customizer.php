@@ -458,10 +458,29 @@ function cp_customize_register( $wp_customize ) {
 		'render_callback' => 'generate_email',
 	));
 
-	$wp_customize->add_section( 'footer' , array(
-	  'title' => __( 'Footer', 'understrap' ),
-	  'priority' => 176
+	$wp_customize->add_setting('social_heading', array(
+		'default' => 'Social Accounts',
+		'transport' => 'postMessage',
+		'sanitize_callback' => 'sanitize_text_field'
+	));
+
+	$wp_customize->add_control( 'social_heading', array(
+	  'label' => __( 'Social Accounts Heading' ),
+	  'description' => __( 'Maximum 20 characters' ),
+	  'type' => 'text',
+	  'section' => 'contact',
+	  'input_attrs' => array(
+	    'maxlength' => 20
+	  )
 	) );
+
+	$wp_customize->selective_refresh->add_partial('social_heading', array(
+    	'selector' => '#social-heading',
+    	'container_inclusive' => false,
+    	'render_callback' => function() {
+            echo get_theme_mod('social_heading');
+        },
+    ));
 
 	$wp_customize->add_setting('facebook', array(
 		'default' => '#',
@@ -472,7 +491,7 @@ function cp_customize_register( $wp_customize ) {
 	$wp_customize->add_control( 'facebook', array(
 	  'label' => __( 'Facebook URL' ),
 	  'type' => 'url',
-	  'section' => 'footer',
+	  'section' => 'contact',
 	) );
 
 	$wp_customize->selective_refresh->add_partial('facebook', array(
@@ -490,7 +509,7 @@ function cp_customize_register( $wp_customize ) {
 	$wp_customize->add_control( 'twitter', array(
 	  'label' => __( 'Twitter URL' ),
 	  'type' => 'url',
-	  'section' => 'footer',
+	  'section' => 'contact',
 	) );
 
 	$wp_customize->selective_refresh->add_partial('twitter', array(
@@ -508,7 +527,7 @@ function cp_customize_register( $wp_customize ) {
 	$wp_customize->add_control( 'youtube', array(
 	  'label' => __( 'YouTube URL' ),
 	  'type' => 'url',
-	  'section' => 'footer',
+	  'section' => 'contact',
 	) );
 
 	$wp_customize->selective_refresh->add_partial('youtube', array(
@@ -526,7 +545,7 @@ function cp_customize_register( $wp_customize ) {
 	$wp_customize->add_control( 'instagram', array(
 	  'label' => __( 'Instagram URL' ),
 	  'type' => 'url',
-	  'section' => 'footer',
+	  'section' => 'contact',
 	) );
 
 	$wp_customize->selective_refresh->add_partial('instagram', array(
@@ -544,7 +563,7 @@ function cp_customize_register( $wp_customize ) {
 	$wp_customize->add_control( 'linkedin', array(
 	  'label' => __( 'LinkedIn URL' ),
 	  'type' => 'url',
-	  'section' => 'footer',
+	  'section' => 'contact',
 	) );
 
 	$wp_customize->selective_refresh->add_partial('linkedin', array(

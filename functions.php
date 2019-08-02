@@ -68,7 +68,10 @@ if (filter_var($_POST['submitted'], FILTER_SANITIZE_STRING) === '1') { // checks
 	// PHP mailer variables
 	$to = get_option('admin_email');
 	$subject = 'New message received from '. get_bloginfo('name');
-	$headers = 'From: '. 'noreply@' . $_SERVER['HTTP_HOST'] . "\r\n" . 'Reply-To: ' . $message_email . "\r\n";
+	$message = 'Name: ' . strip_tags($message_name)
+		. "\r\n" . 'Message: ' . strip_tags($message_text);
+	$headers = 'From: '. 'noreply@' . preg_replace('/www./', '', $_SERVER['HTTP_HOST'], 1)
+		. "\r\n" . 'Reply-To: ' . $message_email . "\r\n";
 	
 	// Initialize response variables
 	$is_valid = ' ' . 'is-valid';
@@ -88,7 +91,7 @@ if (filter_var($_POST['submitted'], FILTER_SANITIZE_STRING) === '1') { // checks
 		$response_human = $response_submitted = $is_invalid;
 	}
 	if ($response_submitted === $is_valid) { // check if form is valid
-		$sent = wp_mail($to, $subject, strip_tags($message_text), $headers);
+		$sent = wp_mail($to, $subject, $message, $headers);
 		if ($sent) { // mail was sent
 			$message_name = $message_email = $message_text = $message_human = $response_name = $response_email = $response_text = $response_human = ''; // Reset the variables
 			if ($ajax_request === '1') wp_send_json_success();
@@ -178,7 +181,7 @@ function cp_site_info() {
 
 	// Append attribution text
 	$site_info = $site_info . sprintf(
-		'<span class="sep"> | </span>%1$s',
+		'<br>%1$s',
 		sprintf(
 			esc_html__('Website by %1$s'),
 			'<a href="' . esc_url('https://www.cyrilpallasigui.com/') . '" target="_blank">Cyril Pallasigui</a>'

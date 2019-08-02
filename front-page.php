@@ -14,18 +14,12 @@ get_header(); ?>
 	<?php if ( get_theme_mod('hero_bg_image') ) { ?>
 	<div class="background-image" id="hero-background" style="background-image: url(<?php echo wp_get_attachment_image_src(get_theme_mod('hero_bg_image'), 'extra_large')[0] ?>);"></div>
 	<?php } ?>
-	<div class="container position-relative py-3 w-md-75 w-lg-50 text-center" id="hero-body">
+	<div class="container position-relative py-3 w-md-75 w-xl-50 text-center" id="hero-body">
 		<div class="background-overlay"></div>
-		<h2 class="display-6 text-white" id="hero-heading"><?php echo get_theme_mod('hero_heading', 'Welcome to our website!'); ?></h2>
+		<h2 class="display-6 display-lg-5 text-white" id="hero-heading"><?php echo get_theme_mod('hero_heading', 'Welcome to our website!'); ?></h2>
 		<p class="text-white" id="hero-text"><?php echo get_theme_mod('hero_text', 'Check out our products and services'); ?></p>
-		<div class="row no-gutters justify-content-center">
-			<div class="col-md-9 col-xl-8 mb-2">
-				<a class="btn btn-primary btn-lg w-100" id="hero-button-primary" href="#about"><?php echo get_theme_mod('hero_button_primary', 'Learn more'); ?></a>
-			</div>
-			<div class="col-md-9 col-xl-8 mb-2">
-				<a class="btn btn-secondary btn-lg w-100" id="hero-button-secondary" href="#contact"><?php echo get_theme_mod('hero_button_secondary', 'Contact us'); ?></a>
-			</div>
-		</div>
+		<a class="btn btn-primary btn-lg d-block mx-auto w-100 max-w-360px mb-2" id="hero-button-primary" href="#about"><?php echo get_theme_mod('hero_button_primary', 'Learn more'); ?></a>
+		<a class="btn btn-secondary btn-lg d-block mx-auto w-100 max-w-360px" id="hero-button-secondary" href="#contact"><?php echo get_theme_mod('hero_button_secondary', 'Contact us'); ?></a>
 	</div>
 </div><!-- #hero-wrapper -->
 
@@ -33,17 +27,17 @@ get_header(); ?>
 	<div class="wrapper" id="about-wrapper">
 		<a class="target-offset" id="about"></a>
 		<div class="container">
-			<h2 class="display-6 text-center mb-5" id="about-heading"><?php echo get_theme_mod('about_heading', 'About'); ?></h2>
-			<div class="row justify-content-center">
+			<div class="row flex-row">
+				<div class="col-md-6 col-lg-7">
+					<h2 class="display-6 display-lg-5 mb-3" id="about-heading"><?php echo get_theme_mod('about_heading', 'About'); ?></h2>
+					<p id="about-text" class="text-prewrap"><?php echo get_theme_mod('about_text', 'About us'); ?></p>
+				</div>
 				<div class="col-md-6 col-lg-5" id="about-image">
 				<?php if ( get_theme_mod('about_image') ) {
 					echo wp_get_attachment_image(get_theme_mod('about_image'), 'full', false, array(
-						'class' => 'img-fluid w-100 mb-3'
+						'class' => 'img-fluid w-100'
 					));
 				} ?>
-				</div>
-				<div class="col-md-6 col-lg-5">
-					<p id="about-text" class="text-prewrap"><?php echo get_theme_mod('about_text', 'About us'); ?></p>
 				</div>
 			</div>
 		</div>
@@ -53,7 +47,7 @@ get_header(); ?>
 	<div class="wrapper" id="testimonials-wrapper">
 		<a class="target-offset" id="testimonials"></a>
 		<div class="container">
-			<h2 class="display-6 text-center mb-5" id="testimonials-heading"><?php echo get_theme_mod('testimonials_heading', 'Testimonials'); ?></h2>
+			<h2 class="display-6 display-lg-5 text-center mb-5" id="testimonials-heading"><?php echo get_theme_mod('testimonials_heading', 'Testimonials'); ?></h2>
 			<div class="carousel slide" id="testimonials-carousel" data-ride="carousel">
 				<div class="carousel-inner">
 					<?php $testimonials = new WP_Query(array(
@@ -94,7 +88,7 @@ get_header(); ?>
 	<div class="wrapper" id="services-wrapper">
 		<a class="target-offset" id="services"></a>
 		<div class="container">
-			<h2 class="display-6 text-center mb-5" id="services-heading"><?php echo get_theme_mod('services_heading', 'Services'); ?></h2>
+			<h2 class="display-6 display-lg-5 text-center mb-5" id="services-heading"><?php echo get_theme_mod('services_heading', 'Services'); ?></h2>
 			<div class="row">
 				<?php $services = new WP_Query(array(
 					'post_type' => 'cp_service',
@@ -148,7 +142,7 @@ get_header(); ?>
 	<div class="wrapper" id="gallery-wrapper">
 		<a class="target-offset" id="gallery"></a>
 		<div class="container">
-			<h2 class="display-6 text-center mb-5" id="gallery-heading"><?php echo get_theme_mod('gallery_heading', 'Gallery'); ?></h2>
+			<h2 class="display-6 display-lg-5 text-center mb-5" id="gallery-heading"><?php echo get_theme_mod('gallery_heading', 'Gallery'); ?></h2>
 			<div class="row">
 				<?php $gallery_items = new WP_Query(array(
 					'post_type' => 'cp_gallery',
@@ -202,11 +196,11 @@ get_header(); ?>
 	<div class="wrapper" id="contact-wrapper">
 		<a class="target-offset" id="contact"></a>
 		<div class="container">
-			<h2 class="display-6 text-center mb-5" id="contact-heading"><?php echo get_theme_mod('contact_heading', 'Contact'); ?></h2>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-5">
+			<div class="row flex-row-reverse">
+				<div class="col-md-6 col-lg-7">
+					<h2 class="display-6 display-lg-5 mb-3" id="contact-heading"><?php echo get_theme_mod('contact_heading', 'Contact'); ?></h2>
 					<p class="text-prewrap mb-3" id="contact-text"><?php echo get_theme_mod('contact_text', 'Contact us'); ?></p>
-					<div class="mb-3" id="contact-details">
+					<div class="mb-4" id="contact-details">
 						<?php if ( get_theme_mod('address', true) ) { ?>
 						<div id="address">
 							<span class="fa-stack fa-lg position-absolute">
@@ -244,6 +238,53 @@ get_header(); ?>
 						</div>
 						<?php } ?>
 					</div>
+
+					<?php if ( get_theme_mod('facebook', true) || get_theme_mod('twitter', true) || get_theme_mod('youtube', true) || get_theme_mod('instagram', true) || get_theme_mod('linkedin', true) ) { ?>
+					<h3 id="social-heading"><?php echo get_theme_mod('social_heading', 'Social Accounts'); ?></h3>
+					<div class="mb-4" id="social-links">
+						<?php if ( get_theme_mod('facebook', '#') ) { ?>
+						<a href="<?php echo get_theme_mod('facebook', '#') ?>" target="_blank" class="text-decoration-none" id="facebook">
+							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
+								<i class="fas fa-square fa-stack-2x color-facebook"></i>
+								<i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+						<?php } ?>
+						<?php if ( get_theme_mod('twitter', '#') ) { ?>
+						<a href="<?php echo get_theme_mod('twitter', '#') ?>" target="_blank" class="text-decoration-none" id="twitter">
+							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
+								<i class="fas fa-square fa-stack-2x color-twitter"></i>
+								<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+						<?php } ?>
+						<?php if ( get_theme_mod('youtube', '#') ) { ?>
+						<a href="<?php echo get_theme_mod('youtube', '#') ?>" target="_blank" class="text-decoration-none" id="youtube">
+							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
+								<i class="fas fa-square fa-stack-2x color-youtube"></i>
+								<i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+						<?php } ?>
+						<?php if ( get_theme_mod('instagram', '#') ) { ?>
+						<a href="<?php echo get_theme_mod('instagram', '#') ?>" target="_blank" class="text-decoration-none" id="instagram">
+							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
+								<i class="fas fa-square fa-stack-2x color-instagrammagenta"></i>
+								<i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+						<?php } ?>
+						<?php if ( get_theme_mod('linkedin', '#') ) { ?>
+						<a href="<?php echo get_theme_mod('linkedin', '#') ?>" target="_blank" class="text-decoration-none" id="linkedin">
+							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
+								<i class="fas fa-square fa-stack-2x color-linkedin"></i>
+								<i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+						<?php } ?>
+					</div><!-- #social-links -->
+					<?php } ?>
+
 				</div>
 				<div class="col-md-6 col-lg-5">
 					<a class="target-offset" id="contact-form"></a>
