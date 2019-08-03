@@ -165,6 +165,16 @@ jQuery(function($) {
       }
     });
 
+    // Parallax
+    $(window).scroll(function() {
+      var scrollHeight = $(this).scrollTop();
+      var $parallaxBackground = $('.parallax-background');
+      $parallaxBackground.each(function() {
+        var offsetTop = scrollHeight * 0.2;
+        $(this).css('top', offsetTop);
+      });
+    });
+
   });/* $(document).ready() */
 
 });/* jQuery() */

@@ -12,7 +12,7 @@ get_header(); ?>
 
 <div class="wrapper position-relative d-flex flex-column justify-content-center align-items-center vh-100 min-h-500px" id="hero-wrapper">
 	<?php if ( get_theme_mod('hero_bg_image') ) { ?>
-	<div class="background-image" id="hero-background" style="background-image: url(<?php echo wp_get_attachment_image_src(get_theme_mod('hero_bg_image'), 'extra_large')[0] ?>);"></div>
+	<div class="background-image parallax-background" id="hero-background" style="background-image: url(<?php echo wp_get_attachment_image_src(get_theme_mod('hero_bg_image'), 'extra_large')[0] ?>);"></div>
 	<?php } ?>
 	<div class="container position-relative py-3 w-md-75 w-xl-50 text-center" id="hero-body">
 		<div class="background-overlay"></div>
@@ -23,7 +23,7 @@ get_header(); ?>
 	</div>
 </div><!-- #hero-wrapper -->
 
-<div class="zebra-striped">
+<div class="zebra-striped bg-white">
 	<div class="wrapper" id="about-wrapper">
 		<a class="target-offset" id="about"></a>
 		<div class="container">
