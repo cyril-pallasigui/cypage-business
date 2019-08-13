@@ -52,7 +52,8 @@ get_header(); ?>
 				<div class="carousel-inner">
 					<?php $testimonials = new WP_Query(array(
 						'post_type' => 'cp_testimonial',
-						'posts_per_page' => 5,
+						'meta_key' => 'testimonial_priority',
+						'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 					));
 					$slide = 0;
 					while($testimonials->have_posts()) {
@@ -84,6 +85,39 @@ get_header(); ?>
 	</div><!-- #testimonials-wrapper -->
 	<?php } ?>
 
+	<?php if (get_theme_mod('recognitions_enabled', 'yes') === 'yes') { ?>
+	<div class="wrapper" id="recognitions-wrapper">
+		<a class="target-offset" id="recognitions"></a>
+		<div class="container">
+			<h2 class="display-6 display-lg-5 text-center mb-5" id="recognitions-heading"><?php echo get_theme_mod('recognitions_heading', 'Recognitions'); ?></h2>
+			<div class="row text-center">
+				<?php $recognitions = new WP_Query(array(
+					'post_type' => 'cp_recognition',
+					'meta_key' => 'recognition_priority',
+					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
+				));
+				while($recognitions->have_posts()) {
+					$recognitions->the_post(); ?>
+					<div class="col-md-6 col-lg-4 d-flex flex-column justify-content-center align-items-center mb-4">
+						<?php if ( get_field('recognition_image') ) {
+							if ( get_field('recognition_link') ) { ?>
+								<a class="mb-3" href="<?php the_field('recognition_link'); ?>" target="_blank">
+									<?php echo wp_get_attachment_image(get_field('recognition_image'), 'recognition_image'); ?>
+								</a>
+							<?php } else {
+								echo wp_get_attachment_image(get_field('recognition_image'), 'recognition_image', false, array(
+									'class' => 'mb-3'
+								));
+							}
+						} ?>
+						<p><?php the_field('recognition_text'); ?></p>
+					</div>
+				<?php } wp_reset_postdata(); ?>
+			</div>
+		</div>
+	</div><!-- #recognitions-wrapper -->
+	<?php } ?>
+
 	<?php if (get_theme_mod('services_enabled', 'yes') === 'yes') { ?>
 	<div class="wrapper" id="services-wrapper">
 		<a class="target-offset" id="services"></a>
@@ -92,7 +126,8 @@ get_header(); ?>
 			<div class="row">
 				<?php $services = new WP_Query(array(
 					'post_type' => 'cp_service',
-					'posts_per_page' => 12,
+					'meta_key' => 'service_priority',
+					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 				));
 				while($services->have_posts()) {
 					$services->the_post(); ?>
@@ -123,8 +158,10 @@ get_header(); ?>
 										href="<?php switch (get_field('service_cta_target')) {
 											case 'contact_details': echo '#contact'; break;
 											case 'contact_form': echo '#contact-form'; break;
-											default: echo '#'; break; } ?>"
+											default: echo '#'; break;
+										} ?>"
 										class="btn btn-secondary"
+										id="cta-<?php echo get_post_field('post_name'); ?>"
 										data-cta-message="<?php the_field('service_cta_message'); ?>">
 										<?php the_field('service_cta_text'); ?>
 									</a>
@@ -138,15 +175,19 @@ get_header(); ?>
 	</div><!-- #services-wrapper -->
 	<?php } ?>
 
-	<?php if (get_theme_mod('gallery_enabled', 'yes') === 'yes') { ?>
+	<?php if ( get_theme_mod('gallery_enabled', 'yes') === 'yes' ) { ?>
 	<div class="wrapper" id="gallery-wrapper">
 		<a class="target-offset" id="gallery"></a>
 		<div class="container">
 			<h2 class="display-6 display-lg-5 text-center mb-5" id="gallery-heading"><?php echo get_theme_mod('gallery_heading', 'Gallery'); ?></h2>
+			
+			<!-- Homepage displays Gallery as Gallery Items -->
+			<?php if ( get_theme_mod('gallery_displays', 'gallery_items') === 'gallery_items' ) { ?>
 			<div class="row">
 				<?php $gallery_items = new WP_Query(array(
 					'post_type' => 'cp_gallery',
-					'posts_per_page' => 12,
+					'meta_key' => 'gallery_priority',
+					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 				));
 				while($gallery_items->have_posts()) {
 					$gallery_items->the_post(); ?>
@@ -189,6 +230,35 @@ get_header(); ?>
 					</div>
 				<?php } wp_reset_postdata(); ?>
 			</div>
+			<?php } ?>
+
+			<!-- Homepage displays Gallery as Gallery Gategories -->
+			<?php if ( get_theme_mod('gallery_displays', 'gallery_items') === 'gallery_categories' ) { ?>
+			<div class="row">
+			<?php $gallery_categories = get_terms(array(
+				'taxonomy' => 'cp_gallery_category',
+				'meta_key' => 'gallery_category_priority',
+				'orderby' => 'meta_value_num',
+				'order' => 'ASC',
+			));
+			foreach ($gallery_categories as $gallery_category) {
+				$gallery_category_link = get_term_link($gallery_category);
+				// If there was an error, continue to the next term
+				if (is_wp_error($gallery_category_link)) {
+				    continue;
+				} ?>
+				<div class="col-md-6 col-xl-4 mb-4">
+					<a href="<?php echo esc_url($gallery_category_link); ?>" class="position-relative d-flex flex-column justify-content-end overflow-hidden">
+						<h3 class="position-absolute z-index-1 pointer-events-none w-100 text-center text-white bg-black-translucent py-1"><?php echo $gallery_category->name; ?></h3>
+						<?php echo wp_get_attachment_image(get_field('gallery_category_image', $gallery_category), 'gallery_thumbnail', false, array(
+							'class' => 'img-fluid w-100 shadow-sm zoom-in-lg'
+						)); ?>
+					</a>
+				</div>
+			<?php } ?>
+			</div>
+			<?php } ?>
+
 		</div>
 	</div><!-- #gallery-wrapper -->
 	<?php } ?>
@@ -239,43 +309,43 @@ get_header(); ?>
 						<?php } ?>
 					</div>
 
-					<?php if ( get_theme_mod('facebook', true) || get_theme_mod('twitter', true) || get_theme_mod('youtube', true) || get_theme_mod('instagram', true) || get_theme_mod('linkedin', true) ) { ?>
+					<?php if ( get_theme_mod('facebook') || get_theme_mod('twitter') || get_theme_mod('youtube') || get_theme_mod('instagram') || get_theme_mod('linkedin') ) { ?>
 					<h3 id="social-heading"><?php echo get_theme_mod('social_heading', 'Social Accounts'); ?></h3>
 					<div class="mb-4" id="social-links">
-						<?php if ( get_theme_mod('facebook', '#') ) { ?>
-						<a href="<?php echo get_theme_mod('facebook', '#') ?>" target="_blank" class="text-decoration-none" id="facebook">
+						<?php if ( get_theme_mod('facebook') ) { ?>
+						<a href="<?php echo get_theme_mod('facebook') ?>" target="_blank" class="text-decoration-none" id="facebook">
 							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
 								<i class="fas fa-square fa-stack-2x color-facebook"></i>
 								<i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
 							</span>
 						</a>
 						<?php } ?>
-						<?php if ( get_theme_mod('twitter', '#') ) { ?>
-						<a href="<?php echo get_theme_mod('twitter', '#') ?>" target="_blank" class="text-decoration-none" id="twitter">
+						<?php if ( get_theme_mod('twitter') ) { ?>
+						<a href="<?php echo get_theme_mod('twitter') ?>" target="_blank" class="text-decoration-none" id="twitter">
 							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
 								<i class="fas fa-square fa-stack-2x color-twitter"></i>
 								<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
 							</span>
 						</a>
 						<?php } ?>
-						<?php if ( get_theme_mod('youtube', '#') ) { ?>
-						<a href="<?php echo get_theme_mod('youtube', '#') ?>" target="_blank" class="text-decoration-none" id="youtube">
+						<?php if ( get_theme_mod('youtube') ) { ?>
+						<a href="<?php echo get_theme_mod('youtube') ?>" target="_blank" class="text-decoration-none" id="youtube">
 							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
 								<i class="fas fa-square fa-stack-2x color-youtube"></i>
 								<i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
 							</span>
 						</a>
 						<?php } ?>
-						<?php if ( get_theme_mod('instagram', '#') ) { ?>
-						<a href="<?php echo get_theme_mod('instagram', '#') ?>" target="_blank" class="text-decoration-none" id="instagram">
+						<?php if ( get_theme_mod('instagram') ) { ?>
+						<a href="<?php echo get_theme_mod('instagram') ?>" target="_blank" class="text-decoration-none" id="instagram">
 							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
 								<i class="fas fa-square fa-stack-2x color-instagrammagenta"></i>
 								<i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
 							</span>
 						</a>
 						<?php } ?>
-						<?php if ( get_theme_mod('linkedin', '#') ) { ?>
-						<a href="<?php echo get_theme_mod('linkedin', '#') ?>" target="_blank" class="text-decoration-none" id="linkedin">
+						<?php if ( get_theme_mod('linkedin') ) { ?>
+						<a href="<?php echo get_theme_mod('linkedin') ?>" target="_blank" class="text-decoration-none" id="linkedin">
 							<span class="fa-stack fa-lg zoom-in-sm mx-n1">
 								<i class="fas fa-square fa-stack-2x color-linkedin"></i>
 								<i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>

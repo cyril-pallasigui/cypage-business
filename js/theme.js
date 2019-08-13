@@ -7207,6 +7207,32 @@ jQuery(function ($) {
         var offsetTop = scrollHeight * 0.2;
         $(this).css('top', offsetTop);
       });
+    }); // Function to get URL parameter values
+
+    var getUrlParamValue = function getUrlParamValue(paramKey) {
+      var paramString = window.location.search.substring(1);
+      var paramPairs = paramString.split('&');
+
+      for (var i = 0; i < paramPairs.length; i++) {
+        var paramPair = paramPairs[i].split('=');
+
+        if (paramPair[0] === paramKey) {
+          return paramPair[1] === undefined ? true : decodeURIComponent(paramPair[1]);
+        }
+      }
+    }; // Process URL parameters
+
+
+    $(window).on('load', function () {
+      var cp_service = getUrlParamValue('cp_service');
+
+      if (cp_service) {
+        var $ctaButton = $('#cta-' + cp_service);
+
+        if ($ctaButton) {
+          $ctaButton.click();
+        }
+      }
     });
   });
   /* $(document).ready() */

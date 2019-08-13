@@ -1,0 +1,123 @@
+{
+    "key": "group_5d4a337f3740d",
+    "title": "Recognition",
+    "fields": [
+        {
+            "key": "field_5d4a33a66769e",
+            "label": "Title",
+            "name": "recognition_title",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d4a33e46769f",
+            "label": "Image",
+            "name": "recognition_image",
+            "type": "image",
+            "instructions": "Suggested image dimensions: 150 by 150 pixels",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "recognition_image",
+            "library": "all",
+            "min_width": 150,
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 300,
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d4a34a2676a0",
+            "label": "Text",
+            "name": "recognition_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_5d4a3573676a2",
+            "label": "Link",
+            "name": "recognition_link",
+            "type": "url",
+            "instructions": "You can add an external link to your recognition.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d4a3502676a1",
+            "label": "Priority",
+            "name": "recognition_priority",
+            "type": "number",
+            "instructions": "Items with lower value will be displayed earlier. The default priority is 10.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 99,
+            "step": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "cp_recognition"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1565689868
+}

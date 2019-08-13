@@ -1,0 +1,69 @@
+{
+    "key": "group_5d47fb25aa7e1",
+    "title": "Gallery Category",
+    "fields": [
+        {
+            "key": "field_5d47fb737545c",
+            "label": "Image",
+            "name": "gallery_category_image",
+            "type": "image",
+            "instructions": "Suggested image dimensions: 512 by 384 pixels",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "gallery_thumbnail",
+            "library": "all",
+            "min_width": 512,
+            "min_height": 384,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 300,
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d521f6c98931",
+            "label": "Priority",
+            "name": "gallery_category_priority",
+            "type": "number",
+            "instructions": "Items with lower value will be displayed earlier. The default priority is 10.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 99,
+            "step": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "cp_gallery_category"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1565689859
+}

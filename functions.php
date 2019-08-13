@@ -114,13 +114,35 @@ function cp_breadcrumbs_page() {
 
 			<!-- Create the breadcrumb for the homepage -->
 			<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-				<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url ?>">
+				<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url; ?>">
 					<i class="fas fa-home mr-1"></i><span itemprop="name">Home</span>
 				</a>
 				<meta itemprop="position" content="1" />
 			</li>
 
-			<?php
+			<!-- The position of the next breadcrumb item -->
+			<?php $position = 2; ?>
+
+			<!-- Check if the current page is linked to a service -->
+			<?php $service = get_posts(array(
+				'post_type' => 'cp_service',
+				'numberposts' => 1,
+				'meta_query' => array(
+					'key' => 'service_link_page',
+					'value' => get_the_ID(),
+				),
+			));
+
+			if ($service) { ?>
+				<!-- Create the breadcrumb for the Services section -->
+				<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+					<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url . '/#services'; ?>">
+						<span itemprop="name"><?php echo get_theme_mod('services_heading', 'Services'); ?></span>
+					</a>
+					<meta itemprop="position" content="<?php echo $position++; ?>" />
+				</li>
+			<?php }
+
 			// Store the parent pages' IDs in an array (if any)
 			$parent_id = $post->post_parent;
 			$parents = array();
@@ -129,8 +151,6 @@ function cp_breadcrumbs_page() {
 				$parent_page = get_post($parent_id);
 				$parent_id = $parent_page->post_parent;
 			}
-
-			$position = 2;
 
 			// Create the breadcrumbs for the parent pages
 			if ($parents) {
@@ -154,6 +174,69 @@ function cp_breadcrumbs_page() {
 		</ol>
 	</nav>
 <?php }
+
+/**
+ * Breadcrumbs for Gallery Category archive page
+ */
+function cp_breadcrumbs_gallery_category($gallery_category) {
+	$home_url = get_bloginfo('url'); ?>
+
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+			<!-- Create the breadcrumb for the homepage -->
+			<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url; ?>">
+					<i class="fas fa-home mr-1"></i><span itemprop="name">Home</span>
+				</a>
+				<meta itemprop="position" content="1" />
+			</li>
+
+			<!-- Create the breadcrumb for the Gallery section -->
+			<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url . '/#gallery'; ?>">
+					<span itemprop="name"><?php echo get_theme_mod('gallery_heading', 'Gallery'); ?></span>
+				</a>
+				<meta itemprop="position" content="2" />
+			</li>
+
+			<!-- Create the breadcrumb for the current Gallery Category -->
+			<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+				<span itemprop="name"><?php echo $gallery_category->name; ?></span>
+				<meta itemprop="position" content="3" />
+			</li>
+
+		</ol>
+	</nav>
+<?php }
+
+/**
+ * Shortcode [cp_cta_button]
+ * Used to display the CTA button on a page linked to a service
+ */
+add_shortcode( 'cp_cta_button', 'cp_cta_button_func' );
+function cp_cta_button_func() {
+	// Check if the current page is linked to a service
+	$service = get_posts(array(
+		'post_type' => 'cp_service',
+		'numberposts' => 1,
+		'meta_query' => array(
+			'key' => 'service_link_page',
+			'value' => get_the_ID(),
+		),
+	));
+
+	if ($service) {
+		$home_url = get_bloginfo('url');
+		$cta_target;
+		switch (get_field('service_cta_target', $service[0]->ID)) {
+			case 'contact_details': $cta_target = '#contact'; break;
+			case 'contact_form': $cta_target = '#contact-form'; break;
+			default: $cta_target = '#'; break;
+		}
+		return '<a href="' . esc_attr($home_url) . '?cp_service=' . esc_attr($service[0]->post_name) . esc_attr($cta_target) . '" class="btn btn-secondary">' . get_field('service_cta_text', $service[0]->ID) . '</a>';
+	}
+}
 
 /**
  * Customize site info content

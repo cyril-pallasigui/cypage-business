@@ -41,6 +41,12 @@
 		} );
 	} );
 
+	wp.customize( 'recognitions_heading', function( value ) {
+		value.bind( function( to ) {
+			$( '#recognitions-heading, #menu-item-recognitions a' ).text( to );
+		} );
+	} );
+
 	wp.customize( 'services_heading', function( value ) {
 		value.bind( function( to ) {
 			$( '#services-heading, #menu-item-services a' ).text( to );

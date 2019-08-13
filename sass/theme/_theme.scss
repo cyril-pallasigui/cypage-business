@@ -141,6 +141,13 @@ a.navbar-brand, a.nav-link, a.btn {
 	opacity: 0.4;
 }
 
+/*
+ * Set a black translucent background
+ */
+.bg-black-translucent {
+	background-color: rgba(33,37,41,0.4) !important;
+}
+
 /* Set an element's width to 50% on medium devices and up */
 @include media-breakpoint-up(md) {
 	.w-md-50 {
@@ -246,6 +253,14 @@ a.target-offset {
 }
 .zoom-in-sm:hover {
 	transform: scale(1.1);
+}
+
+.z-index-1 {
+	z-index: 1 !important;
+}
+
+.pointer-events-none {
+	pointer-events: none !important;
 }
 
 /* Create an expandable text block with "Show more/less" link */

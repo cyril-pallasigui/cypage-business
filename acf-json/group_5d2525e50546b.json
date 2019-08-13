@@ -1,0 +1,123 @@
+{
+    "key": "group_5d2525e50546b",
+    "title": "Gallery",
+    "fields": [
+        {
+            "key": "field_5d2525feeebab",
+            "label": "Title",
+            "name": "gallery_title",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d252617eebac",
+            "label": "Image",
+            "name": "gallery_image",
+            "type": "image",
+            "instructions": "Suggested image dimensions: 512 by 384 pixels",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "gallery_full",
+            "library": "all",
+            "min_width": 512,
+            "min_height": 384,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 300,
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d252642eebad",
+            "label": "Text",
+            "name": "gallery_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_5d252659eebae",
+            "label": "Link",
+            "name": "gallery_link",
+            "type": "url",
+            "instructions": "You can add an external link to your gallery item.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d25266ceebaf",
+            "label": "Priority",
+            "name": "gallery_priority",
+            "type": "number",
+            "instructions": "Items with lower value will be displayed earlier. The default priority is 10.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 999,
+            "step": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "cp_gallery"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1565689962
+}

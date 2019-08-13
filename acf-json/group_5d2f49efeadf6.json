@@ -1,0 +1,134 @@
+{
+    "key": "group_5d2f49efeadf6",
+    "title": "CTA Button",
+    "fields": [
+        {
+            "key": "field_5d2f4a1629fbb",
+            "label": "Enable CTA Button",
+            "name": "service_cta_enabled",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d2f4a3a29fbc",
+            "label": "CTA Button Text",
+            "name": "service_cta_text",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d2f4a1629fbb",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Inquire",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d2f4a7229fbd",
+            "label": "CTA Button Target",
+            "name": "service_cta_target",
+            "type": "radio",
+            "instructions": "Select where the CTA button will redirect to",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d2f4a1629fbb",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "contact_details": "Contact Details",
+                "contact_form": "Contact Form"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "contact_details",
+            "layout": "horizontal",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5d2f4aa929fbe",
+            "label": "Contact Form Message",
+            "name": "service_cta_message",
+            "type": "textarea",
+            "instructions": "Prepopulate the \"Message\" field of the contact form with this text when the CTA button is clicked",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d2f4a1629fbb",
+                        "operator": "==",
+                        "value": "1"
+                    },
+                    {
+                        "field": "field_5d2f4a7229fbd",
+                        "operator": "==",
+                        "value": "contact_form"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "cp_service"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1565689892
+}

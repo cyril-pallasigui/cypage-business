@@ -214,27 +214,27 @@ function cp_customize_register( $wp_customize ) {
         },
     ));
 
-    $wp_customize->add_section( 'testimonials' , array(
-	  'title' => __( 'Testimonials Section', 'understrap' ),
-	  'description' => __( 'To manage individual testimonials, go to WP Admin > Testimonials' ),
-	  'priority' => 172
-	) );
+	$wp_customize->add_section( 'testimonials' , array(
+		'title' => __( 'Testimonials Section', 'understrap' ),
+		'description' => __( 'To manage individual testimonials, go to WP Admin > Testimonials' ),
+		'priority' => 172
+	));
 
-    $wp_customize->add_setting('testimonials_enabled', array(
+	$wp_customize->add_setting('testimonials_enabled', array(
 		'default' => 'yes',
 		'transport' => 'refresh',
 		'sanitize_callback' => 'theme_slug_sanitize_select'
 	));
 
 	$wp_customize->add_control( 'testimonials_enabled', array(
-	  'label' => __( 'Show Testimonials section' ),
-	  'type' => 'radio',
-	  'section' => 'testimonials',
-	  'choices' => array(
-	    'yes' => 'Yes',
-	    'no' => 'No',
-	  )
-	) );
+		'label' => __( 'Show Testimonials section' ),
+		'type' => 'radio',
+		'section' => 'testimonials',
+		'choices' => array(
+			'yes' => 'Yes',
+			'no' => 'No',
+		)
+	));
 
 	$wp_customize->add_setting('testimonials_heading', array(
 		'default' => 'Testimonials',
@@ -243,27 +243,73 @@ function cp_customize_register( $wp_customize ) {
 	));
 
 	$wp_customize->add_control( 'testimonials_heading', array(
-	  'label' => __( 'Heading' ),
-	  'description' => __( 'Maximum 20 characters' ),
-	  'type' => 'text',
-	  'section' => 'testimonials',
-	  'input_attrs' => array(
-	    'maxlength' => 20
-	  )
-	) );
+		'label' => __( 'Heading' ),
+		'description' => __( 'Maximum 20 characters' ),
+		'type' => 'text',
+		'section' => 'testimonials',
+		'input_attrs' => array(
+			'maxlength' => 20
+		)
+	));
 
 	$wp_customize->selective_refresh->add_partial('testimonials_heading', array(
-    	'selector' => '#testimonials-heading',
-    	'container_inclusive' => false,
-    	'render_callback' => function() {
-            echo get_theme_mod('testimonials_heading');
-        },
-    ));
+		'selector' => '#testimonials-heading',
+		'container_inclusive' => false,
+		'render_callback' => function() {
+			echo get_theme_mod('testimonials_heading');
+		},
+	));
+
+	$wp_customize->add_section( 'recognitions' , array(
+		'title' => __( 'Recognitions Section', 'understrap' ),
+		'description' => __( 'To manage individual recognitions, go to WP Admin > Recognitions' ),
+		'priority' => 173
+	));
+
+	$wp_customize->add_setting('recognitions_enabled', array(
+		'default' => 'yes',
+		'transport' => 'refresh',
+		'sanitize_callback' => 'theme_slug_sanitize_select'
+	));
+
+	$wp_customize->add_control( 'recognitions_enabled', array(
+		'label' => __( 'Show Recognitions section' ),
+		'type' => 'radio',
+		'section' => 'recognitions',
+		'choices' => array(
+			'yes' => 'Yes',
+			'no' => 'No',
+		)
+	));
+
+	$wp_customize->add_setting('recognitions_heading', array(
+		'default' => 'Recognitions',
+		'transport' => 'postMessage',
+		'sanitize_callback' => 'sanitize_text_field'
+	));
+
+	$wp_customize->add_control( 'recognitions_heading', array(
+		'label' => __( 'Heading' ),
+		'description' => __( 'Maximum 20 characters' ),
+		'type' => 'text',
+		'section' => 'recognitions',
+		'input_attrs' => array(
+			'maxlength' => 20
+		)
+	));
+
+	$wp_customize->selective_refresh->add_partial('recognitions_heading', array(
+		'selector' => '#recognitions-heading',
+		'container_inclusive' => false,
+		'render_callback' => function() {
+			echo get_theme_mod('recognitions_heading');
+		},
+	));
 
     $wp_customize->add_section( 'services' , array(
 	  'title' => __( 'Services Section', 'understrap' ),
 	  'description' => __( 'To manage individual services, go to WP Admin > Services' ),
-	  'priority' => 173
+	  'priority' => 174
 	) );
 
 	$wp_customize->add_setting('services_enabled', array(
@@ -309,7 +355,7 @@ function cp_customize_register( $wp_customize ) {
     $wp_customize->add_section( 'gallery' , array(
 	  'title' => __( 'Gallery Section', 'understrap' ),
 	  'description' => __( 'To manage individual gallery items, go to WP Admin > Gallery' ),
-	  'priority' => 174
+	  'priority' => 175
 	) );
 
     $wp_customize->add_setting('gallery_enabled', array(
@@ -352,9 +398,25 @@ function cp_customize_register( $wp_customize ) {
         },
     ));
 
+	$wp_customize->add_setting('gallery_displays', array(
+		'default' => 'gallery_items',
+		'transport' => 'refresh',
+		'sanitize_callback' => 'theme_slug_sanitize_select'
+	));
+
+	$wp_customize->add_control( 'gallery_displays', array(
+		'label' => __( 'Homepage displays Gallery as:' ),
+		'type' => 'select',
+		'section' => 'gallery',
+		'choices' => array(
+			'gallery_items' => 'Gallery Items',
+			'gallery_categories' => 'Gallery Categories',
+		)
+	));
+
     $wp_customize->add_section( 'contact' , array(
 	  'title' => __( 'Contact Section', 'understrap' ),
-	  'priority' => 175
+	  'priority' => 176
 	) );
 
 	$wp_customize->add_setting('contact_heading', array(
@@ -483,13 +545,13 @@ function cp_customize_register( $wp_customize ) {
     ));
 
 	$wp_customize->add_setting('facebook', array(
-		'default' => '#',
+		'default' => '',
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'esc_url_raw'
 	));
 
 	$wp_customize->add_control( 'facebook', array(
-	  'label' => __( 'Facebook URL' ),
+	  'label' => __( 'Facebook Account URL' ),
 	  'type' => 'url',
 	  'section' => 'contact',
 	) );
@@ -501,13 +563,13 @@ function cp_customize_register( $wp_customize ) {
 	));
 
 	$wp_customize->add_setting('twitter', array(
-		'default' => '#',
+		'default' => '',
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'esc_url_raw'
 	));
 
 	$wp_customize->add_control( 'twitter', array(
-	  'label' => __( 'Twitter URL' ),
+	  'label' => __( 'Twitter Account URL' ),
 	  'type' => 'url',
 	  'section' => 'contact',
 	) );
@@ -519,13 +581,13 @@ function cp_customize_register( $wp_customize ) {
 	));
 
 	$wp_customize->add_setting('youtube', array(
-		'default' => '#',
+		'default' => '',
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'esc_url_raw'
 	));
 
 	$wp_customize->add_control( 'youtube', array(
-	  'label' => __( 'YouTube URL' ),
+	  'label' => __( 'YouTube Account URL' ),
 	  'type' => 'url',
 	  'section' => 'contact',
 	) );
@@ -537,13 +599,13 @@ function cp_customize_register( $wp_customize ) {
 	));
 
 	$wp_customize->add_setting('instagram', array(
-		'default' => '#',
+		'default' => '',
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'esc_url_raw'
 	));
 
 	$wp_customize->add_control( 'instagram', array(
-	  'label' => __( 'Instagram URL' ),
+	  'label' => __( 'Instagram Account URL' ),
 	  'type' => 'url',
 	  'section' => 'contact',
 	) );
@@ -555,13 +617,13 @@ function cp_customize_register( $wp_customize ) {
 	));
 
 	$wp_customize->add_setting('linkedin', array(
-		'default' => '#',
+		'default' => '',
 		'transport' => 'postMessage',
 		'sanitize_callback' => 'esc_url_raw'
 	));
 
 	$wp_customize->add_control( 'linkedin', array(
-	  'label' => __( 'LinkedIn URL' ),
+	  'label' => __( 'LinkedIn Account URL' ),
 	  'type' => 'url',
 	  'section' => 'contact',
 	) );

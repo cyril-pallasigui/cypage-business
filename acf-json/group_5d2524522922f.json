@@ -1,0 +1,135 @@
+{
+    "key": "group_5d2524522922f",
+    "title": "Service",
+    "fields": [
+        {
+            "key": "field_5d2524771f0eb",
+            "label": "Title",
+            "name": "service_title",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d25248b1f0ec",
+            "label": "Icon",
+            "name": "service_icon",
+            "type": "font-awesome",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "icon_sets": [
+                "fas",
+                "far",
+                "fab"
+            ],
+            "custom_icon_set": "",
+            "default_label": "",
+            "default_value": "",
+            "save_format": "class",
+            "allow_null": 1,
+            "show_preview": 1,
+            "enqueue_fa": 0,
+            "fa_live_preview": "",
+            "choices": []
+        },
+        {
+            "key": "field_5d2524b11f0ed",
+            "label": "Image Cap",
+            "name": "service_image",
+            "type": "image",
+            "instructions": "Suggested image dimensions: 512 by 288 pixels",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "preview_size": "service_image",
+            "library": "all",
+            "min_width": 512,
+            "min_height": 288,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 300,
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d2524e31f0ee",
+            "label": "Description",
+            "name": "service_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": ""
+        },
+        {
+            "key": "field_5d2525021f0ef",
+            "label": "Priority",
+            "name": "service_priority",
+            "type": "number",
+            "instructions": "Items with lower value will be displayed earlier. The default priority is 10.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 10,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 1,
+            "max": 99,
+            "step": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "cp_service"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1565689874
+}
