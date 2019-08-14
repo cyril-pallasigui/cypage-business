@@ -128,8 +128,17 @@ function cp_breadcrumbs_page() {
 				'post_type' => 'cp_service',
 				'numberposts' => 1,
 				'meta_query' => array(
-					'key' => 'service_link_page',
-					'value' => get_the_ID(),
+					'relation' => 'AND',
+					array(
+						'key' => 'service_link_enabled',
+						'type' => 'BINARY',
+						'value' => true,
+					),
+					array(
+						'key' => 'service_link_page',
+						'type' => 'NUMERIC',
+						'value' => get_the_ID(),
+					)
 				),
 			));
 
