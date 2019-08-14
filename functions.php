@@ -121,36 +121,60 @@ function cp_breadcrumbs_page() {
 			</li>
 
 			<!-- The position of the next breadcrumb item -->
-			<?php $position = 2; ?>
+			<?php $position = 2;
 
-			<!-- Check if the current page is linked to a service -->
-			<?php $service = get_posts(array(
-				'post_type' => 'cp_service',
-				'numberposts' => 1,
-				'meta_query' => array(
-					'relation' => 'AND',
-					array(
-						'key' => 'service_link_enabled',
-						'type' => 'BINARY',
-						'value' => true,
-					),
-					array(
-						'key' => 'service_link_page',
-						'type' => 'NUMERIC',
-						'value' => get_the_ID(),
-					)
-				),
+			// Store the IDs of the current page and its parents (if any) in an array
+			$related_pages = array();
+			$related_pages[] = $post->ID;
+			$parent_id = $post->post_parent;
+			while ($parent_id) {
+				$related_pages[] = $parent_id;
+				$parent_page = get_post($parent_id);
+				$parent_id = $parent_page->post_parent;
+			}
+
+			// Include the IDs of the children pages in the array
+			$children = get_pages(array(
+				'child_of' => $post->ID
 			));
 
-			if ($service) { ?>
-				<!-- Create the breadcrumb for the Services section -->
-				<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-					<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url . '/#services'; ?>">
-						<span itemprop="name"><?php echo get_theme_mod('services_heading', 'Services'); ?></span>
-					</a>
-					<meta itemprop="position" content="<?php echo $position++; ?>" />
-				</li>
-			<?php }
+			if ($children) {
+				foreach ($children as $child) {
+					$related_pages[] = $child->ID;
+				}
+			}
+
+			// Check if the current page or one of its parents or children is linked to a service
+			foreach ($related_pages as $related_page) {
+				$service = get_posts(array(
+					'post_type' => 'cp_service',
+					'numberposts' => 1,
+					'meta_query' => array(
+						'relation' => 'AND',
+						array(
+							'key' => 'service_link_page',
+							'type' => 'NUMERIC',
+							'value' => $related_page,
+						),
+						array(
+							'key' => 'service_link_enabled',
+							'type' => 'BINARY',
+							'value' => true,
+						)
+					),
+				));
+
+				if ($service) { ?>
+					<!-- Create the breadcrumb for the Services section -->
+					<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo $home_url . '/#services'; ?>">
+							<span itemprop="name"><?php echo get_theme_mod('services_heading', 'Services'); ?></span>
+						</a>
+						<meta itemprop="position" content="<?php echo $position++; ?>" />
+					</li>
+					<?php break;
+				}
+			}
 
 			// Store the parent pages' IDs in an array (if any)
 			$parent_id = $post->post_parent;
@@ -230,8 +254,17 @@ function cp_cta_button_func() {
 		'post_type' => 'cp_service',
 		'numberposts' => 1,
 		'meta_query' => array(
-			'key' => 'service_link_page',
-			'value' => get_the_ID(),
+			'relation' => 'AND',
+			array(
+				'key' => 'service_link_page',
+				'type' => 'NUMERIC',
+				'value' => get_the_ID(),
+			),
+			array(
+				'key' => 'service_link_enabled',
+				'type' => 'BINARY',
+				'value' => true,
+			)
 		),
 	));
 
