@@ -47,11 +47,12 @@ get_header(); ?>
 	<div class="wrapper" id="testimonials-wrapper">
 		<a class="target-offset" id="testimonials"></a>
 		<div class="container">
-			<h2 class="display-6 display-lg-5 text-center mb-5" id="testimonials-heading"><?php echo get_theme_mod('testimonials_heading', 'Testimonials'); ?></h2>
+			<h2 class="display-6 display-lg-5 text-center mb-3" id="testimonials-heading"><?php echo get_theme_mod('testimonials_heading', 'Testimonials'); ?></h2>
 			<div class="carousel slide" id="testimonials-carousel" data-ride="carousel">
 				<div class="carousel-inner">
 					<?php $testimonials = new WP_Query(array(
 						'post_type' => 'cp_testimonial',
+						'posts_per_page' => 10,
 						'meta_key' => 'testimonial_priority',
 						'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 					));
@@ -59,7 +60,7 @@ get_header(); ?>
 					while($testimonials->have_posts()) {
 						$testimonials->the_post(); ?>
 						<div class="carousel-item<?php if ($slide === 0) echo ' active'; ?>">
-							<div class="h-300px d-flex flex-column justify-content-center align-items-center w-md-50 mx-auto">
+							<div class="h-450px h-md-300px d-flex flex-column justify-content-center align-items-center w-lg-75 mx-auto">
 								<?php echo wp_get_attachment_image(get_field('testimonial_photo'), 'testimonial_photo', false, array(
 									'class' => 'rounded-circle mb-2'
 								)); ?>
@@ -93,6 +94,7 @@ get_header(); ?>
 			<div class="row text-center">
 				<?php $recognitions = new WP_Query(array(
 					'post_type' => 'cp_recognition',
+					'posts_per_page' => 12,
 					'meta_key' => 'recognition_priority',
 					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 				));
@@ -126,6 +128,7 @@ get_header(); ?>
 			<div class="row">
 				<?php $services = new WP_Query(array(
 					'post_type' => 'cp_service',
+					'posts_per_page' => 12,
 					'meta_key' => 'service_priority',
 					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 				));
@@ -186,6 +189,7 @@ get_header(); ?>
 			<div class="row">
 				<?php $gallery_items = new WP_Query(array(
 					'post_type' => 'cp_gallery',
+					'posts_per_page' => 12,
 					'meta_key' => 'gallery_priority',
 					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
 				));
@@ -237,6 +241,7 @@ get_header(); ?>
 			<div class="row">
 			<?php $gallery_categories = get_terms(array(
 				'taxonomy' => 'cp_gallery_category',
+				'number' => 12,
 				'meta_key' => 'gallery_category_priority',
 				'orderby' => 'meta_value_num',
 				'order' => 'ASC',

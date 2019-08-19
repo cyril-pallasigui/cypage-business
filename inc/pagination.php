@@ -21,8 +21,8 @@ if ( ! function_exists( 'understrap_pagination' ) ) {
 			array(
 				'mid_size'           => 2,
 				'prev_next'          => true,
-				'prev_text'          => __( '&laquo;', 'understrap' ),
-				'next_text'          => __( '&raquo;', 'understrap' ),
+				'prev_text'          => __( '&lsaquo;', 'understrap' ),
+				'next_text'          => __( '&rsaquo;', 'understrap' ),
 				'screen_reader_text' => __( 'Posts navigation', 'understrap' ),
 				'type'               => 'array',
 				'current'            => max( 1, get_query_var( 'paged' ) ),
@@ -35,7 +35,7 @@ if ( ! function_exists( 'understrap_pagination' ) ) {
 
 		<nav aria-label="<?php echo $args['screen_reader_text']; ?>">
 
-			<ul class="pagination">
+			<ul class="pagination justify-content-center">
 
 				<?php
 				foreach ( $links as $key => $link ) {

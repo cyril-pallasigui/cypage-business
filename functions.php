@@ -209,7 +209,7 @@ function cp_breadcrumbs_page() {
 <?php }
 
 /**
- * Breadcrumbs for Gallery Category archive page
+ * Breadcrumbs for Gallery Category archive pages
  */
 function cp_breadcrumbs_gallery_category($gallery_category) {
 	$home_url = get_bloginfo('url'); ?>
@@ -277,6 +277,19 @@ function cp_cta_button_func() {
 			default: $cta_target = '#'; break;
 		}
 		return '<a href="' . esc_attr($home_url) . '?cp_service=' . esc_attr($service[0]->post_name) . esc_attr($cta_target) . '" class="btn btn-secondary">' . get_field('service_cta_text', $service[0]->ID) . '</a>';
+	}
+}
+
+/**
+ * Modify the main WP_Query for Gallery Category archive pages
+ */
+add_action( 'pre_get_posts', 'cp_gallery_category_archive_query' );
+function cp_gallery_category_archive_query( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && $query->is_tax('cp_gallery_category') ) {
+		$query->set( 'post_type', 'cp_gallery' );
+		$query->set( 'posts_per_page', 12 );
+		$query->set( 'meta_key', 'gallery_priority' );
+		$query->set( 'orderby', array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ) );
 	}
 }
 

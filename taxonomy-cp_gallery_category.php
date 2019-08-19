@@ -25,20 +25,8 @@ $container = get_theme_mod( 'understrap_container_type' ); ?>
 
 			<h1 class="display-6 display-lg-5 text-center mb-5 mt-4"><?php echo $gallery_category->name; ?></h1>
 			<div class="row">
-				<?php $gallery_items = new WP_Query(array(
-					'post_type' => 'cp_gallery',
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'cp_gallery_category',
-							'field' => 'slug',
-							'terms' => $gallery_category->slug,
-						),
-					),
-					'meta_key' => 'gallery_priority',
-					'orderby' => array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ),
-				));
-				while($gallery_items->have_posts()) {
-					$gallery_items->the_post(); ?>
+				<?php while( have_posts() ) {
+					the_post(); ?>
 					<div class="col-md-6 col-xl-4 mb-4">
 						<a data-toggle="modal" href="#<?php echo get_post_field('post_name'); ?>">
 							<?php echo wp_get_attachment_image(get_field('gallery_image'), 'gallery_thumbnail', false, array(
@@ -78,6 +66,9 @@ $container = get_theme_mod( 'understrap_container_type' ); ?>
 					</div>
 				<?php } wp_reset_postdata(); ?>
 			</div>
+
+			<!-- The pagination component -->
+			<?php understrap_pagination(); ?>
 
 		</main><!-- #main -->
 

@@ -50,7 +50,7 @@
             "label": "Text",
             "name": "testimonial_text",
             "type": "textarea",
-            "instructions": "Maximum 180 characters",
+            "instructions": "Maximum 400 characters",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -60,8 +60,8 @@
             },
             "default_value": "",
             "placeholder": "",
-            "maxlength": 180,
-            "rows": 4,
+            "maxlength": 400,
+            "rows": 5,
             "new_lines": ""
         },
         {
@@ -103,5 +103,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1565689881
+    "modified": 1566181862
 }

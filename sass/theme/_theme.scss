@@ -59,7 +59,7 @@
 }
 
 /* Remove underline from specific links */
-a.navbar-brand, a.nav-link, a.btn {
+a.navbar-brand, a.nav-link, a.btn, a.page-link {
 	text-decoration: none;
 }
 .navbar-brand a {
@@ -226,9 +226,16 @@ a.target-offset {
 	white-space: pre-wrap !important;
 }
 
-/* Set an element's height to 300px */
-.h-300px {
-	height: 300px !important;
+/* Set an element's height to 450px */
+.h-450px {
+	height: 450px !important;
+}
+
+/* Set an element's height to 300px on medium devices and up */
+@include media-breakpoint-up(md) {
+	.h-md-300px {
+		height: 300px !important;
+	}
 }
 
 /* Wrap an element's content with left and right double quotes */
