@@ -7233,6 +7233,24 @@ jQuery(function ($) {
           $ctaButton.click();
         }
       }
+    }); // Back button closes the modal
+
+    $('.modal').on('show.bs.modal', function (e) {
+      var $modal = $(this);
+      window.location.hash = $modal.prop('id');
+
+      window.onhashchange = function () {
+        if (window.location.hash !== $modal.prop('id')) {
+          $modal.modal('hide');
+        }
+      };
+    });
+    $('.modal').on('hide.bs.modal', function (e) {
+      var $modal = $(this);
+
+      if (window.location.hash === '#' + $modal.prop('id')) {
+        window.history.back();
+      }
     });
   });
   /* $(document).ready() */

@@ -233,10 +233,42 @@ function cp_breadcrumbs_gallery_category($gallery_category) {
 				<meta itemprop="position" content="2" />
 			</li>
 
+			<!-- The position of the next breadcrumb item -->
+			<?php $position = 3;
+
+			// Retrieve a list of the parents' slugs
+			$parents_list = get_term_parents_list( $gallery_category, 'cp_gallery_category', array(
+				'format' => 'slug',
+				'separator' => '/',
+				'link' => false,
+				'inclusive' => false
+			) );
+
+			// Create an empty parents array
+			$parents_array = array();
+
+			// If a list of parents was retrieved, populate the parents array
+			if ( $parents_list ) {
+				$parents_array = explode( '/', rtrim( $parents_list, '/' ) );
+			}
+
+			// Create the breadcrumbs for the parent categories
+			if ($parents_array) {
+				foreach ($parents_array as $parent) {
+					$parent_category = get_term_by( 'slug', $parent, 'cp_gallery_category' ); ?>
+					<li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<a itemtype="https://schema.org/Thing" itemprop="item" href="<?php echo get_term_link($parent_category); ?>">
+							<span itemprop="name"><?php echo $parent_category->name; ?></span>
+						</a>
+						<meta itemprop="position" content="<?php echo $position++; ?>" />
+					</li>
+				<?php }
+			} ?>
+
 			<!-- Create the breadcrumb for the current Gallery Category -->
 			<li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
 				<span itemprop="name"><?php echo $gallery_category->name; ?></span>
-				<meta itemprop="position" content="3" />
+				<meta itemprop="position" content="<?php echo $position; ?>" />
 			</li>
 
 		</ol>
@@ -287,9 +319,25 @@ add_action( 'pre_get_posts', 'cp_gallery_category_archive_query' );
 function cp_gallery_category_archive_query( $query ) {
 	if ( ! is_admin() && $query->is_main_query() && $query->is_tax('cp_gallery_category') ) {
 		$query->set( 'post_type', 'cp_gallery' );
-		$query->set( 'posts_per_page', 12 );
+		$query->set( 'posts_per_page', 18 );
 		$query->set( 'meta_key', 'gallery_priority' );
 		$query->set( 'orderby', array( 'meta_value_num' => 'ASC', 'date' => 'DESC' ) );
+	}
+}
+
+/**
+ * Exclude posts of children terms from parent term results
+ */
+add_action( 'pre_get_posts', 'cp_gallery_category_query' );
+function cp_gallery_category_query( $query ) {
+	if ( $query->is_tax('cp_gallery_category') ) {
+		$query->set( 'tax_query', array( array(
+			'taxonomy' => 'cp_gallery_category',
+			'terms' => $query->query_vars['cp_gallery_category'],
+			'field' => 'slug',
+			'operator' => 'IN',
+			'include_children' => false
+		) ) );
 	}
 }
 

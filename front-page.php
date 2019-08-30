@@ -241,6 +241,7 @@ get_header(); ?>
 			<div class="row">
 			<?php $gallery_categories = get_terms(array(
 				'taxonomy' => 'cp_gallery_category',
+				'parent' => 0,
 				'number' => 12,
 				'meta_key' => 'gallery_category_priority',
 				'orderby' => 'meta_value_num',

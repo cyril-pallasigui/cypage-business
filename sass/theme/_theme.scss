@@ -82,6 +82,16 @@ a.navbar-brand, a.nav-link, a.btn, a.page-link {
 	}
 }
 
+/* Use thumbnails as carousel indicators */
+.carousel-indicators-thumbnail {
+	li {
+		width: 100px;
+		height: 100px;
+		text-indent: 0;
+		border: 0;
+	}
+}
+
 /**
  * Custom utility classes
  */
@@ -145,7 +155,7 @@ a.navbar-brand, a.nav-link, a.btn, a.page-link {
  * Set a black translucent background
  */
 .bg-black-translucent {
-	background-color: rgba(33,37,41,0.4) !important;
+	background-color: rgba(0,0,0,0.4) !important;
 }
 
 /* Set an element's width to 50% on medium devices and up */
@@ -308,6 +318,42 @@ a.target-offset {
 .required:after {
 	content: ' *';
 	color: red;
+}
+
+.object-fit-contain {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: contain !important;
+}
+
+.object-fit-cover {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover !important;
+}
+
+/* Fullscreen modal */
+.modal-fs {
+	max-width: 100vw;
+	margin: 0;
+	.modal-content {
+		height: 100vh;
+		border-radius: 0;
+		border: 0;
+		background-color: rgba(0,0,0,0.95);
+		/* Position the close button on the upper-right corner */
+		.close {
+			position: absolute;
+			top: 0rem;
+			right: 0rem;
+			font-size: 2rem;
+			padding: 1rem;
+			color: $white;
+		}
+		img {
+			@extend .object-fit-contain;
+		}
+	}
 }
 
 /**

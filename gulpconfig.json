@@ -3,7 +3,7 @@
 		"proxy": "http://cypage-business.local/",
 		"notify": false,
 		"ghostMode": false,
-		"host": "192.168.254.107"
+		"host": "192.168.254.101"
 	},
 	"browserSyncWatchFiles": ["./css/*.min.css", "./js/*.min.js", "./**/*.php"],
 	"paths": {
