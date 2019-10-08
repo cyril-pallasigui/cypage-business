@@ -672,7 +672,11 @@ function generate_navbar_brand() {
 
 function generate_hero_bg_image() {
 	if ( get_theme_mod('hero_bg_image') ) { ?>
-	<div class="background-image" id="hero-background" style="background-image: url(<?php echo wp_get_attachment_image_src(get_theme_mod('hero_bg_image'), 'extra_large')[0] ?>);"></div>
+	<div class="background-image parallax-background" id="hero-background">
+		<?php echo wp_get_attachment_image(get_theme_mod('hero_bg_image'), 'extra_large', false, array(
+			'class' => 'd-block object-fit-cover'
+		)); ?>
+	</div>
 	<?php }
 }
 

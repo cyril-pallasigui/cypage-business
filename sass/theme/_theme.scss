@@ -324,12 +324,22 @@ a.target-offset {
 	width: 100% !important;
 	height: 100% !important;
 	object-fit: contain !important;
+	> img {
+		width: 100% !important;
+		height: 100% !important;
+		object-fit: contain !important;
+	}
 }
 
 .object-fit-cover {
 	width: 100% !important;
 	height: 100% !important;
 	object-fit: cover !important;
+	> img {
+		width: 100% !important;
+		height: 100% !important;
+		object-fit: cover !important;
+	}
 }
 
 /* Fullscreen modal */

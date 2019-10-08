@@ -1,9 +1,9 @@
 {
 	"browserSyncOptions": {
-		"proxy": "http://cypage-business.local/",
+		"proxy": "https://cypage-business.local/",
 		"notify": false,
 		"ghostMode": false,
-		"host": "192.168.254.101"
+		"host": "192.168.254.103"
 	},
 	"browserSyncWatchFiles": ["./css/*.min.css", "./js/*.min.js", "./**/*.php"],
 	"paths": {

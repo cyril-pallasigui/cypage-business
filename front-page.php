@@ -12,7 +12,11 @@ get_header(); ?>
 
 <div class="wrapper position-relative d-flex flex-column justify-content-center align-items-center vh-100 min-h-500px" id="hero-wrapper">
 	<?php if ( get_theme_mod('hero_bg_image') ) { ?>
-	<div class="background-image parallax-background" id="hero-background" style="background-image: url(<?php echo wp_get_attachment_image_src(get_theme_mod('hero_bg_image'), 'extra_large')[0] ?>);"></div>
+	<div class="background-image parallax-background" id="hero-background">
+		<?php echo wp_get_attachment_image(get_theme_mod('hero_bg_image'), 'extra_large', false, array(
+			'class' => 'd-block object-fit-cover'
+		)); ?>
+	</div>
 	<?php } ?>
 	<div class="container position-relative py-3 w-md-75 w-xl-50 text-center" id="hero-body">
 		<div class="background-overlay"></div>
@@ -62,7 +66,7 @@ get_header(); ?>
 						<div class="carousel-item<?php if ($slide === 0) echo ' active'; ?>">
 							<div class="h-450px h-md-300px d-flex flex-column justify-content-center align-items-center w-lg-75 mx-auto">
 								<?php echo wp_get_attachment_image(get_field('testimonial_photo'), 'testimonial_photo', false, array(
-									'class' => 'rounded-circle mb-2'
+									'class' => 'rounded-circle overflow-hidden mb-2'
 								)); ?>
 								<blockquote class="blockquote text-center blockquote-normalized">
 									<p class="wrap-quotes mb-0"><?php the_field('testimonial_text'); ?></p>
@@ -198,7 +202,7 @@ get_header(); ?>
 					<div class="col-md-6 col-xl-4 mb-4">
 						<a data-toggle="modal" href="#<?php echo get_post_field('post_name'); ?>">
 							<?php echo wp_get_attachment_image(get_field('gallery_image'), 'gallery_thumbnail', false, array(
-								'class' => 'img-fluid w-100 shadow-sm zoom-in-lg'
+								'class' => 'img-fluid w-100 shadow-sm zoom-in-lg d-block'
 							)); ?>
 						</a>
 						<!-- Modal -->

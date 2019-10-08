@@ -65,7 +65,7 @@ $container = get_theme_mod( 'understrap_container_type' ); ?>
 						<div class="col-md-6 col-xl-4 mb-4">
 							<a data-toggle="modal" href="#<?php echo get_post_field('post_name'); ?>">
 								<?php echo wp_get_attachment_image(get_field('gallery_image'), 'gallery_thumbnail', false, array(
-									'class' => 'img-fluid w-100 shadow-sm zoom-in-lg'
+									'class' => 'img-fluid w-100 shadow-sm zoom-in-lg d-block'
 								)); ?>
 							</a>
 							<!-- Modal -->
